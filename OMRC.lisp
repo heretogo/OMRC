@@ -2,8 +2,8 @@
 ;;
 ;;            Rhythm Constraints library
 ;;
-;;            Orjan Sandred,  © IRCAM 1999 (vesrion 1.1)
-;;            Orjan Sandred, © Stockholm 2002 (version 1.3)
+;;            Orjan Sandred, (c) IRCAM 1999 (version 1.1)
+;;            Orjan Sandred, (c) Stockholm 2002 (version 1.3)
 ;;
 ;;            update 1.3 august 2002
 ;;            this update adds the possibility to work with pauses in all functions/rules
@@ -18,6 +18,7 @@
 
 (in-package om)
 
+(om::require-library "OMCS")
  
 ;--------------------------------------------------
 ;Loading files 
@@ -46,6 +47,8 @@
 ; RC subpackages initialization
 ; ("sub-pack-name" subpacke-lists class-list function-list class-alias-list)
 ;--------------------------------------------------
+(in-package :rc)
+
 (om::fill-library 
  '(
    ("01-build domains" nil nil (rc::domains->pmc rc::voice-domain rc::preset-layer rc::preset-timesign rc::make-rhythm-domain) nil)
@@ -54,13 +57,15 @@
    ("03b-rules" (("QUANTIZE" nil nil (rc::r-quant rc::hr-quant_dev rc::hr-quant_ornaments) nil)) nil (rc::r-hierarchy rc::r-eqlength rc::r-layerorder rc::r-identical rc::r-beat-subdiv rc::r-sync-over-barline rc::r-pattern rc::r-canon rc::r-markov rc::r-order-priority rc::gr-hierarchy rc::gr-eqlength rc::gr-layerorder rc::gr-identical rc::gr-canon) nil)
    ("04-user rules tools" nil nil (rc::get-this-cell rc::get-this-cell-dur rc::get-last-cell rc::get-cell-before-last rc::get-cell-two-before-last rc::get-all-cells 
                                                  rc::get-cell-other-layer rc::get-cell-any-layer rc::get-rhythm-other-layer rc::get-rhythm-any-layer rc::get-all-cells-any-layer 
-                                                 rc::get-time get-layernumber rc::get-voicenumber rc::pause? rc::rhythmcell? rc::timesign? rc::test-equal rc::test-not-equal) nil)
+                                                 rc::get-time rc::get-layernumber rc::get-voicenumber rc::pause? rc::rhythmcell? rc::timesign? rc::test-equal rc::test-not-equal) nil)
    ("05-lock sections" nil (rc::stored-section) (rc::store-section rc::r-lock-to-stored rc::decode-stored-section) nil)
    ("06-formating" nil nil (rc::simpleformat->tree rc::tree->simpleformat rc::rhythmdomain->voices) nil)
    ))
 
 
 (om::set-lib-release 1.5)
+
+(in-package :om)
 
 (print "
 ;;;=========================================
